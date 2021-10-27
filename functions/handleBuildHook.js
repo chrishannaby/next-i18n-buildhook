@@ -6,6 +6,7 @@ var apiEndpoint = "https://next-i18n.prismic.io/api/v2";
 const buildHooks = {
   "en-us": "https://api.netlify.com/build_hooks/6178b78f17ea0133ca602723",
   "de-de": "https://api.netlify.com/build_hooks/6178b7b9a309cd344ea5ccef",
+  "es-es": "https://api.netlify.com/build_hooks/61797028c2577f3a90f059ad",
 };
 
 exports.handler = async (event, context) => {
