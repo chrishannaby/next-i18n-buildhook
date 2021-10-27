@@ -1,22 +1,19 @@
 const Prismic = require("@prismicio/client");
 const fetch = require("node-fetch");
 
-var apiEndpoint = "https://netlifyswag.cdn.prismic.io/api/v2";
+var apiEndpoint = "https://next-i18n.prismic.io/api/v2";
 
 const buildHooks = {
-  en: "https://api.netlify.com/build_hooks/60ece721ccc8c3501d62be62",
-  es: "https://api.netlify.com/build_hooks/60ece7d77f8b5c5235bd67f3",
+  "en-us": "https://api.netlify.com/build_hooks/6178b78f17ea0133ca602723",
+  "de-de": "https://api.netlify.com/build_hooks/6178b7b9a309cd344ea5ccef",
 };
 
 exports.handler = async (event, context) => {
-  console.log(event);
-  console.log(context);
   const documentId = JSON.parse(event.body).documents[0];
   if (documentId) {
     const api = await Prismic.client(apiEndpoint);
     const document = await api.getByID(documentId);
-    const lang = document.lang;
-    const buildHook = buildHooks[lang.split("-")[0]];
+    const buildHook = buildHooks[document.lang];
     if (buildHook) {
       await fetch(buildHook, {
         method: "POST",
